@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import { PatientView } from './PatientView';
-import { WardView } from './WardView';
-import { PatientForm } from './PatientForm';
-import { WardForm } from './WardForm';
+import { PatientView } from './features/patient/PatientView';
+import { WardView } from './features/ward/WardView';
+import { PatientForm } from './features/patient/PatientForm';
+import { WardForm } from './features/ward/WardForm';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import { HospitalView } from './HospitalView';
+import { HospitalView } from './features/HospitalView';
 
 function App() {
   return (

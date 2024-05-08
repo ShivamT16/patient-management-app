@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { patientSlice } from '../patientSlice';
-import { wardSlice } from '../wardSlice';
+import { wardSlice } from '../features/ward/wardSlice';
+import { patientSlice } from '../features/patient/patientSlice';
 
 export const store = configureStore({
   reducer: {

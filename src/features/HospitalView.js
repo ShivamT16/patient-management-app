@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchPatients } from "./patientSlice"
-import { fetchWards } from "./wardSlice"
+import { fetchPatients } from "./patient/patientSlice"
+import { fetchWards } from "./ward/wardSlice"
 
 export const HospitalView = () => {
     const dispatch = useDispatch()
