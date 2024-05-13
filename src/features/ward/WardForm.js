@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addWard, updateWard } from "./wardSlice"
 import { useParams } from "react-router-dom"
+import "./inputForm.css"
 
 export const WardForm = () => {
     const {id} = useParams()
@@ -19,27 +20,38 @@ export const WardForm = () => {
         const value = e.target.value
         setNewWard({...newWard, [name]: value})
     }
-    const handleSubmit = () => {
-    const findWard = wards.find((item) => item.wardNumber === newWard.wardNumber || item.specialization.toLowerCase() === newWard.specialization.toLowerCase() )
 
-    if (ward) {
-     dispatch(updateWard({id: ward._id,updatedWard: newWard}))
-    }else{
-        if(findWard) {
-            console.log("Ward already exists")
+    const handleSubmit = () => {
+    if(!newWard.wardNumber || !newWard.capacity || !newWard.specialization)
+        {
+        console.log("All fields are required")
+    }
+    else{
+        if(ward) {
+          dispatch(updateWard({id: ward._id,updatedWard: newWard}))
         }
         else{
-            dispatch(addWard(newWard))
-        }
-    } 
-    }
+            const findWard = wards.find((item) => item.wardNumber === newWard.wardNumber || item.specialization.toLowerCase() === newWard.specialization.toLowerCase())
+
+            if(findWard) {
+                console.log("Ward already exists")
+            }
+            else{
+                dispatch(addWard(newWard))
+            }
+        } } } 
 
     return(
-        <div>
-            <input type='number' name="wardNumber" value={newWard.wardNumber} placeholder="Ward Number" autoComplete="off" onChange={handleChange} />
-            <input type='number' name="capacity" value={newWard.capacity} placeholder="Capacity" autoComplete="off" onChange={handleChange} />
-            <input type='text' name="specialization" value={newWard.specialization} placeholder="Specialization" autoComplete="off" onChange={handleChange} />
-            <button onClick={handleSubmit}>{ward ? "Update Ward" : "Add New Ward"}</button>
+        <div className="input-main">
+
+            <h2>Add New Ward</h2>
+
+            <input className="input" type='text' name="specialization" value={newWard.specialization} placeholder="Ward Specialization" autoComplete="off" onChange={handleChange} />
+            <input className="input" type='number' name="wardNumber" value={newWard.wardNumber} placeholder="Ward Number" autoComplete="off" onChange={handleChange} />
+            <input className="input" type='number' name="capacity" value={newWard.capacity} placeholder="Capacity" autoComplete="off" onChange={handleChange} />
+            
+            <button className="submit-btn" onClick={handleSubmit}>{ward ? "Update Ward" : "Add New Ward"}</button>
+
         </div>
     )
 }

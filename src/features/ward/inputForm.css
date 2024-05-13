@@ -1,0 +1,16 @@
+.input-main{
+    margin: 2% 25% ;
+    padding: 0% 3% 2%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 2px solid grey;
+}
+.input{
+    margin: .6% 20%;
+    font-size: 1rem;
+}
+.submit-btn{
+    margin: .5% 30%;
+    font-size: 0.9rem;
+}

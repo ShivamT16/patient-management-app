@@ -6,23 +6,28 @@ import { PatientForm } from './features/patient/PatientForm';
 import { WardForm } from './features/ward/WardForm';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import { HospitalView } from './features/HospitalView';
+import { WardDetail } from './features/ward/WardDetail';
+import { PatientDetail } from './features/patient/PatientDetail';
 
 function App() {
   return (
     <div className="App">
-      <h2>Patient Management Application</h2>
       <Router>
-        <nav>
-        <NavLink to="/" >Dashboard</NavLink>
-        <NavLink to="/patients" >Patients</NavLink>
-        <NavLink to="/wards">Wards</NavLink>
+        <nav className='nav'>
+        <h2>Patient Management Application</h2>
+        <NavLink className="navlink" to="/" >Dashboard</NavLink>
+        <NavLink className="navlink" to="/patients" >Patients</NavLink>
+        <NavLink className="navlink" to="/wards">Wards</NavLink>
+        <NavLink className="navlink" to="https://github.com/ShivamT16/patient-management-app" target="_blank" >GitHub</NavLink>
         </nav>
         <Routes>
         <Route path="/" element={<HospitalView />} />
         <Route path="/patients" element={<PatientView />} />
+        <Route path="/patients/details/:id" element={<PatientDetail />} />
         <Route path="/patients/add" element={<PatientForm />} />
         <Route path="/patients/update/:id" element={<PatientForm />} />
         <Route path="/wards" element={<WardView />} />
+        <Route path="/wards/details/:wardName" element={<WardDetail />} />
         <Route path="/wards/add" element={<WardForm />} />
         <Route path="wards/update/:id" element={<WardForm />} />
         <Route />

@@ -28,23 +28,28 @@ export const PatientForm = () => {
     }
 
     return(
-        <div>
-            <input type='text' name='name' value={newPatient.name} onChange={handleChange} autoComplete="off" placeholder='Patient Name' />
-            <input type='number' name='age' value={newPatient.age} onChange={handleChange} autoComplete="off" placeholder="Age" />
-            <select name='gender' value={newPatient.gender} onChange={handleChange} >
+        <div className="input-main">
+
+            <h2>Add New Patient</h2>
+
+            <input className="input" type='text' name='name' value={newPatient.name} onChange={handleChange} autoComplete="off" placeholder='Patient Name' />
+            <input className="input" type='number' name='age' value={newPatient.age} onChange={handleChange} autoComplete="off" placeholder="Age" />
+            <select className="input" name='gender' value={newPatient.gender} onChange={handleChange} >
             <option>Gender</option>
             <option>Male</option>
             <option>Female</option>
             <option>Others</option>
             </select>
-            <input type='text' name='medicalHistory' value={newPatient.medicalHistory} onChange={handleChange} autoComplete="off" placeholder="Medical History" />
-            <input type='number' name='contact' value={newPatient.contact} onChange={handleChange} autoComplete="off" placeholder="Contact Number" />
-            <select name='ward' value={newPatient.ward} onChange={handleChange}>
-               <option value="" >Ward</option>
+            <input className="input" type='text' name='medicalHistory' value={newPatient.medicalHistory} onChange={handleChange} autoComplete="off" placeholder="Medical History" />
+            <input className="input" type='number' name='contact' value={newPatient.contact} onChange={handleChange} autoComplete="off" placeholder="Contact Number" />
+            <select className="input" name='ward' value={newPatient.ward} onChange={handleChange}>
+               <option value="" >Ward No. / Name</option>
                {wards.map((e) =>
-               <option key={e._id}> {e.specialization} </option>)}
+               <option key={e._id}> {e.wardNumber} / {e.specialization} </option>)}
             </select>
-            <button onClick={handleSubmit}>{patient ? "Update New Patient" : "Add New Patient" }</button>
+
+            <button className="submit-btn" onClick={handleSubmit}>{patient ? "Update New Patient" : "Add New Patient" }</button>
+
         </div>
     )
 }

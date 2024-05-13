@@ -16,18 +16,25 @@ export const WardView = () => {
     }, [dispatch,status] )
    
     return(
-        <div>
+        <div className="view-main">
             <h2>Ward View</h2>
-        {status === 'loading' && <p> Loading... </p>}
-        {status === 'error' && <p> Error: {error} </p>}
-        <Link to="/wards/add" >Add New Ward</Link>
-        {wards.map((element) => 
-        <div key={element._id}>
-          {element.wardNumber}
-          <button onClick={() => dispatch(deleteWard(element._id))} >Delete</button>
+
+        {status === 'loading' && <h3> Loading... </h3>}
+        {status === 'error' && <h3> Error: {error} </h3>}
+
+        <Link className="add-link" to="/wards/add" >Add New Ward</Link>
+        <p className="header">Ward Number / Ward Specialization || Capacity of Ward</p>
+
+        {wards.map((element, _index) => 
+        <div className="viewList" key={element._id} style={{ backgroundColor: _index%2 === 0 ? "whitesmoke" : "white"  }} >
+          <Link className="link" to={`/wards/details/${element.specialization}`} >
+          {element.wardNumber} / {element.specialization} || {element.capacity} beds
+          </Link>
+          <Link><button onClick={() => dispatch(deleteWard(element._id))} >Delete</button></Link>
           <Link to={`/wards/update/${element._id}`} ><button>Edit</button></Link>
         </div>
       )}
+
         </div>
     )
 }

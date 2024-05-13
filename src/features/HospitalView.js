@@ -8,7 +8,6 @@ export const HospitalView = () => {
     const wards = useSelector((state)=>state.ward.ward)
     const patient = useSelector((state => state.patient.patient))
 
-    const totalPatients = patient.length
     const totalOccupancy = wards.reduce((acc,curr) =>  acc + curr.capacity , 0)
 
     useEffect(() => {
@@ -18,10 +17,11 @@ export const HospitalView = () => {
       [dispatch] )
     
     return(
-        <div>
+        <div className="view-main">
              <h2>Hospital View</h2>
-             <h3>Total Patients: {totalPatients}</h3>
-             <h3>Current Occupancy: {totalPatients}/{totalOccupancy} </h3>
+             <h3 className="viewList">Total Speciality Wards: {wards.length}</h3>
+             <h3 className="viewList">Total Patients: {patient.length}</h3>
+             <h3 className="viewList">Current Occupancy: {patient.length}/{totalOccupancy} </h3>
         </div>
     )
 }

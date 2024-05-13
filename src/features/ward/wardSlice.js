@@ -74,7 +74,7 @@ export const wardSlice = createSlice({
             const updatedWard = action.payload
             const index = state.ward.findIndex((ward) => ward._id === updatedWard._id )
             if (index !== -1) {
-                state.ward[index] = updateWard
+                state.ward[index] = updatedWard
             }
         },
         [updateWard.rejected]: (state, action) => {
