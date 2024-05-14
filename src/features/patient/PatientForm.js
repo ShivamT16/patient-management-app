@@ -1,11 +1,14 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addPatients, updatePatients } from "./patientSlice"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const PatientForm = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const patient = useSelector((state) => state.patient.patient.find((item) => item._id === id))
     const wards = useSelector((state) => state.ward.ward)
     const [newPatient, setNewPatient] = useState({
@@ -24,8 +27,12 @@ export const PatientForm = () => {
     }
 
     const handleSubmit = () => {
-    patient ? dispatch(updatePatients({id: patient._id, updatedPatient:newPatient})) : dispatch(addPatients(newPatient))
-    }
+     if( !newPatient.name || !newPatient.age || !newPatient.gender || !newPatient.medicalHistory || !newPatient.contact || !newPatient.ward){
+        toast.warn("All fields are required")
+     } else {
+    patient ? dispatch(updatePatients({id: patient._id, updatedPatient:newPatient})) : dispatch(addPatients(newPatient));
+    navigate("/patients")
+    } }
 
     return(
         <div className="input-main">
@@ -49,7 +56,7 @@ export const PatientForm = () => {
             </select>
 
             <button className="submit-btn" onClick={handleSubmit}>{patient ? "Update New Patient" : "Add New Patient" }</button>
-
+        <ToastContainer autoClose={2000} />
         </div>
     )
 }

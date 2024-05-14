@@ -1,12 +1,15 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addWard, updateWard } from "./wardSlice"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./inputForm.css"
 
 export const WardForm = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const wards = useSelector((state) => state.ward.ward)
     const ward = wards.find((item) => item._id === id )
     const [newWard, setNewWard] = useState({
@@ -24,20 +27,22 @@ export const WardForm = () => {
     const handleSubmit = () => {
     if(!newWard.wardNumber || !newWard.capacity || !newWard.specialization)
         {
-        console.log("All fields are required")
+        toast.warn("All fields are required")
     }
     else{
         if(ward) {
           dispatch(updateWard({id: ward._id,updatedWard: newWard}))
+          navigate("/wards")
         }
         else{
             const findWard = wards.find((item) => item.wardNumber === newWard.wardNumber || item.specialization.toLowerCase() === newWard.specialization.toLowerCase())
 
             if(findWard) {
-                console.log("Ward already exists")
+                toast.error("Ward already exists")
             }
             else{
                 dispatch(addWard(newWard))
+                navigate("/wards")
             }
         } } } 
 
@@ -51,7 +56,7 @@ export const WardForm = () => {
             <input className="input" type='number' name="capacity" value={newWard.capacity} placeholder="Capacity" autoComplete="off" onChange={handleChange} />
             
             <button className="submit-btn" onClick={handleSubmit}>{ward ? "Update Ward" : "Add New Ward"}</button>
-
+        <ToastContainer autoClose={2000} />
         </div>
     )
 }

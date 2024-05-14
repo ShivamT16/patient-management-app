@@ -4,7 +4,7 @@ import axios from "axios"
 export const fetchPatients = createAsyncThunk(
     'patients/fetchPatients',
     async () => {
-        const response = await axios.get('https://fed54acd-9743-4f95-903d-1f9637e92761-00-3nn98g209acyn.spock.replit.dev/patients',)
+        const response = await axios.get('https://patient-management-api-blush.vercel.app/patients',)
         return response.data
     }
 )
@@ -12,7 +12,7 @@ export const fetchPatients = createAsyncThunk(
 export const addPatients = createAsyncThunk(
     'patients/addPatients',
     async (newPatient) => {
-        const response = await axios.post('https://fed54acd-9743-4f95-903d-1f9637e92761-00-3nn98g209acyn.spock.replit.dev/patients',
+        const response = await axios.post('https://patient-management-api-blush.vercel.app/patients',
      newPatient,)
      return response.data
     },
@@ -21,7 +21,7 @@ export const addPatients = createAsyncThunk(
 export const updatePatients = createAsyncThunk(
     'patients/updatePatients',
     async ({id, updatedPatient}) => {
-        const response = await axios.post(`https://fed54acd-9743-4f95-903d-1f9637e92761-00-3nn98g209acyn.spock.replit.dev/patients/${id}`,
+        const response = await axios.post(`https://patient-management-api-blush.vercel.app/patients/${id}`,
     updatedPatient,)
     return response.data
     }
@@ -30,7 +30,7 @@ export const updatePatients = createAsyncThunk(
 export const deletePatients = createAsyncThunk(
     'patients/deletePatients',
     async (id) => {
-        const response = await axios.delete(`https://fed54acd-9743-4f95-903d-1f9637e92761-00-3nn98g209acyn.spock.replit.dev/patients/${id}`,)
+        const response = await axios.delete(`https://patient-management-api-blush.vercel.app/patients/${id}`,)
         return response.data
     }
 )
